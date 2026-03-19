@@ -3,6 +3,7 @@
 import Cd from "../ascii/cd";
 import RedFire from "../ascii/red-fire";
 import CopyDropdown from "./copy-drop-down";
+import { useSearch } from "./search-context";
 
 const asciiAnimations = [
   {
@@ -20,9 +21,21 @@ const asciiAnimations = [
 ];
 
 const AsciiAnimationsGrid = () => {
+  const { query } = useSearch();
+  const normalizedQuery = query.trim().toLowerCase();
+  const filteredAnimations = asciiAnimations.filter((item) => {
+    if (!normalizedQuery) return true;
+
+    return (
+      item.name.toLowerCase().includes(normalizedQuery) ||
+      item.description.toLowerCase().includes(normalizedQuery) ||
+      item.registryName.toLowerCase().includes(normalizedQuery)
+    );
+  });
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 max-w-[70vw] mx-auto">
-      {asciiAnimations.map((item, index) => (
+      {filteredAnimations.map((item, index) => (
         <div
           key={index}
           className="relative  border border-dashed rounded-3xl aspect-square flex items-center justify-center overflow-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"

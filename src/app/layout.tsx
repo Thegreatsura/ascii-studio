@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/landing/navbar";
+import { SearchProvider } from "@/components/landing/search-context";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -44,8 +45,10 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col">
-        <Navbar />
-        {children}
+        <SearchProvider>
+          <Navbar />
+          {children}
+        </SearchProvider>
       </body>
     </html>
   );
