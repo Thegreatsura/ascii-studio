@@ -1,7 +1,7 @@
 "use client";
 
 import Cd from "../ascii/cd";
-import RedFire from "../ascii/red fire";
+import RedFire from "../ascii/red-fire";
 import CopyDropdown from "./copy-drop-down";
 import { useSearch } from "./search-context";
 
@@ -38,7 +38,7 @@ const AsciiAnimationsGrid = () => {
       {filteredAnimations.map((item, index) => (
         <div
           key={index}
-          className="relative  border border-dashed rounded-3xl aspect-square flex items-center justify-center overflow-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+          className="relative  border rounded-3xl aspect-square flex items-center justify-center overflow-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         >
           <div className="z-30">{item.component}</div>
 
