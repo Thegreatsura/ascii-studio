@@ -1,6 +1,7 @@
 "use client";
 
 import Cd from "../ascii/cd";
+import Pitstop from "../ascii/pitstop";
 import RedFire from "../ascii/red-fire";
 import CopyDropdown from "./copy-drop-down";
 import { useSearch } from "./search-context";
@@ -9,14 +10,24 @@ const asciiAnimations = [
   {
     name: "Red Fire",
     description: "ASCII flame animation in a red terminal style.",
+    component: <Pitstop />,
+    registryName: "red-fire",
+    landscape: true,
+  },
+
+  {
+    name: "Red Fire",
+    description: "ASCII flame animation in a red terminal style.",
     component: <RedFire />,
     registryName: "red-fire",
+    landscape: false, // Example: this one will span two columns
   },
   {
     name: "CD Animation",
     description: "ASCII animation of a CD spinning.",
     component: <Cd />,
     registryName: "cd",
+    landscape: false,
   },
 ];
 
@@ -34,11 +45,11 @@ const AsciiAnimationsGrid = () => {
   });
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2  gap-2  w-[95vw] sm:w-[70vw] mx-auto">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-[95vw] sm:w-[70vw] mx-auto">
       {filteredAnimations.map((item, index) => (
         <div
           key={index}
-          className="relative  border rounded-3xl aspect-square flex items-center justify-center overflow-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+          className={`relative border rounded-3xl aspect-square flex items-center justify-center overflow-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden ${item.landscape ? "sm:col-span-2" : ""}`}
         >
           <div className="z-30">{item.component}</div>
 

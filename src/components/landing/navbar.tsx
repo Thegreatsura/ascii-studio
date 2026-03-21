@@ -22,9 +22,9 @@ export default function Navbar() {
 
   return (
     <header className="fixed top-6 left-1/2 -translate-x-1/2 w-[95vw] sm:w-[70vw] z-50 rounded-3xl  bg-background/40 backdrop-blur-lg border ">
-      <div className="container flex w-full items-center px-4 py-3">
+      <div className="container flex justify-between w-full items-center px-4 py-3">
         {/* Logo left */}
-        <div className="flex flex-1 items-center gap-2 min-w-0">
+        <div className="flex items-center gap-2">
           <Link
             href="/"
             className="flex items-center gap-2 transition-all duration-300 hover:opacity-80"
@@ -41,7 +41,7 @@ export default function Navbar() {
         </div>
 
         {/* Social buttons right */}
-        <nav className="flex flex-1 justify-end items-center gap-2 ">
+        <nav className="flex items-center gap-2 justify-end">
           {/* <ButtonGroup>
             <Button variant="outline">
               <Search />
