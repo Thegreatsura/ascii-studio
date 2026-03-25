@@ -1,6 +1,9 @@
 "use client";
 
+import Ascii2Balls from "../ascii/2-balls";
 import Cd from "../ascii/cd";
+import Dust from "../ascii/Dust";
+import HandFire from "../ascii/hand-fire";
 import Pitstop from "../ascii/pitstop";
 import RainbowFire from "../ascii/rainbow-fire";
 import RedFire from "../ascii/red-fire";
@@ -9,6 +12,27 @@ import CopyDropdown from "./copy-drop-down";
 import { useSearch } from "./search-context";
 
 const asciiAnimations = [
+  // {
+  //   name: "2 Balls",
+  //   description: "ASCII animation of two looping balls.",
+  //   component: <Ascii2Balls />,
+  //   registryName: "2-balls",
+  //   landscape: false,
+  // },
+  {
+    name: "Hand Fire",
+    description: "ASCII animation of a hand holding fire/flame.",
+    component: <HandFire />,
+    registryName: "hand-fire",
+    landscape: true,
+  },
+  // {
+  //   name: "Dust",
+  //   description: "A swirling dust animation.",
+  //   component: <Dust />,
+  //   registryName: "dust",
+  //   landscape: true,
+  // },
   {
     name: "Star",
     description: "ASCII animation of a star.",
@@ -24,10 +48,10 @@ const asciiAnimations = [
     landscape: false,
   },
   {
-    name: "Red Fire",
-    description: "ASCII flame animation in a red terminal style.",
+    name: "Pitstop",
+    description: "ASCII animation of a Formula 1 pitstop with cars and crew.",
     component: <Pitstop />,
-    registryName: "red-fire",
+    registryName: "pitstop",
     landscape: true,
   },
   {

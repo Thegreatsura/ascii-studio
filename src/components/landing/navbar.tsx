@@ -7,8 +7,22 @@ import { Button } from "../ui/button";
 import { StarsCount } from "./stars-count";
 import { ModeToggle } from "./theme-toggle";
 
+import { useSearch } from "./search-context";
+import { Search } from "lucide-react";
+import { Input } from "../ui/input";
+
 export default function Navbar() {
   const [visible, setVisible] = useState(true);
+  const { query, setQuery } = useSearch();
+  const [searchOpen, setSearchOpen] = useState(false);
+  const inputRef = React.useRef<HTMLInputElement>(null);
+
+  // Focus input when search opens
+  useEffect(() => {
+    if (searchOpen && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [searchOpen]);
 
   useEffect(() => {
     let previousScrollPos = window.scrollY;
@@ -67,8 +81,10 @@ export default function Navbar() {
         </Link>
       </div>
 
-      {/* Social buttons right */}
+      {/* Social buttons and search right */}
       <nav className="flex items-center gap-2 justify-end">
+        {/* Search button/input */}
+
         <Link
           target="_blank"
           href={"https://github.com/vansh-nagar/ASCII-Studio"}
@@ -78,24 +94,36 @@ export default function Navbar() {
             className="text-xs border-red-500 dark:border-red-500"
           >
             <Github className="w-6 h-6 " /> <StarsCount />
-            /500{" "}
+            /500
           </Button>
         </Link>
+        <div className="relative flex items-center">
+          {!searchOpen ? (
+            <Button
+              variant="outline"
+              size="icon"
+              aria-label="Open search"
+              onClick={() => setSearchOpen(true)}
+            >
+              <Search className="w-5 h-5" />
+            </Button>
+          ) : (
+            <div className="flex items-center gap-2 transition-all">
+              <Input
+                ref={inputRef}
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                onBlur={() => setSearchOpen(false)}
+                placeholder="Search components by name..."
+                style={{ minWidth: 0 }}
+              />
+            </div>
+          )}
+        </div>
         {/* <Link target="_blank" href={"https://x.com/vansh1029"}>
             <Button variant="outline" size="icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                width="24"
-                height="24"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                fill="none"
-              >
-                <path d="M3 21L10.5484 13.4516M21 3L13.4516 10.5484M13.4516 10.5484L8 3H3L10.5484 13.4516M13.4516 10.5484L21 21H16L10.5484 13.4516" />
-              </svg>
+              <svg ... />
             </Button>
           </Link> */}
         <ModeToggle />
