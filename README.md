@@ -1,6 +1,18 @@
 # ASCII Studio
 
-Turn videos into precise, high-performance real ASCII animations.
+Turn videos into high-performance real ASCII animations :)
+
+ASCII Studio processes video frames in real time and converts them into precise ASCII representations using an optimized rendering pipeline.
+
+Customize density, contrast, and character sets to generate unique outputs, all without leaving the browser.
+
+## Sponsors
+
+<p>
+  <a href="https://vercel.com" target="_blank">
+    <img src="https://assets.vercel.com/image/upload/front/favicon/vercel/180x180.png" alt="Vercel" height="50" />
+  </a>
+</p>
 
 ---
 
