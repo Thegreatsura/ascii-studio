@@ -1,27 +1,39 @@
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/81b5ae3e-47ee-43f8-b7eb-2512e005b221" width="140" />
-</p>
+# ASCII Studio
 
-<h1 align="center">ASCII Studio</h1>
+Turn videos into high-performance real ASCII animations :)
 
-<p align="center">
-  Turn videos into precise, high-performance ASCII animations.
+ASCII Studio processes video frames in real time and converts them into precise ASCII representations using an optimized rendering pipeline.
+
+Customize density, contrast, and character sets to generate unique outputs, all without leaving the browser.
+
+## Sponsors
+
+<p>
+  <a href="https://vercel.com" target="_blank">
+    <img src="https://assets.vercel.com/image/upload/front/favicon/vercel/180x180.png" alt="Vercel" height="50" />
+  </a>
 </p>
 
 ---
 
-### Preview
+## Powered by Vercel
+
+<img src="https://github.com/user-attachments/assets/5bc3b368-d71a-48aa-b45f-67cbf49fe538" />
+
+---
+
+## Preview
 
 https://github.com/user-attachments/assets/1537e97a-ff49-42f6-8d42-dd3fcdaa280f
 
 ---
 
-### Star History
+## Star History
 
 <a href="https://www.star-history.com/?repos=vansh-nagar%2Fascii-studio&type=date&legend=top-left">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/image?repos=vansh-nagar/ascii-studio&type=date&theme=dark&legend=top-left" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/image?repos=vansh-nagar/ascii-studio&type=date&legend=top-left" />
-   <img alt="Star History Chart" src="https://api.star-history.com/image?repos=vansh-nagar/ascii-studio&type=date&legend=top-left" />
- </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/image?repos=vansh-nagar/ascii-studio&type=date&theme=dark&legend=top-left" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/image?repos=vansh-nagar/ascii-studio&type=date&legend=top-left" />
+    <img alt="Star History Chart" src="https://api.star-history.com/image?repos=vansh-nagar/ascii-studio&type=date&legend=top-left" />
+  </picture>
 </a>
