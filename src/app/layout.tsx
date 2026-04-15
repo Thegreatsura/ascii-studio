@@ -3,6 +3,9 @@ import "./globals.css";
 import { SearchProvider } from "@/components/landing/search-context";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { Analytics } from "@vercel/analytics/next";
+import { GeistPixelGrid } from "geist/font/pixel";
+
+const geistPixelGrid = GeistPixelGrid;
 
 export const metadata: Metadata = {
   title: "ascii studio",
@@ -47,7 +50,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className="h-full antialiased">
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`h-full antialiased dark ${geistPixelGrid.variable} `}
+    >
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -68,7 +75,7 @@ export default function RootLayout({
       <body>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
