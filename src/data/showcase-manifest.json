@@ -1,22 +1,13 @@
 {
   "regular": [
     {
-      "id": "car",
-      "name": "car",
-      "description": "....",
-      "fileName": "car.tsx",
-      "exportName": "Car",
-      "registryName": "car",
-      "landscape": true
-    },
-    {
       "id": "rocket-blast",
       "name": "Rocket Blast",
       "description": "ASCII rocket blasting off with animated flames and smoke.",
       "fileName": "rocket-blast.tsx",
       "exportName": "RocketBlast",
       "registryName": "rocket-blast-2",
-      "landscape": true
+      "landscape": false
     },
     {
       "id": "skull",
@@ -28,6 +19,15 @@
       "landscape": false
     },
     {
+      "id": "pitstop",
+      "name": "Pitstop",
+      "description": "ASCII animation of a Formula 1 pitstop with cars and crew.",
+      "fileName": "pitstop.tsx",
+      "exportName": "Pitstop",
+      "registryName": "pitstop",
+      "landscape": true
+    },
+    {
       "id": "cd",
       "name": "CD Animation",
       "description": "ASCII animation of a CD spinning.",
@@ -35,15 +35,6 @@
       "exportName": "Cd",
       "registryName": "cd",
       "landscape": false
-    },
-    {
-      "id": "train",
-      "name": "train",
-      "description": "...",
-      "fileName": "train.tsx",
-      "exportName": "Train",
-      "registryName": "train",
-      "landscape": true
     },
     {
       "id": "lightning",
@@ -64,15 +55,6 @@
       "landscape": false
     },
     {
-      "id": "pitstop",
-      "name": "Pitstop",
-      "description": "ASCII animation of a Formula 1 pitstop with cars and crew.",
-      "fileName": "pitstop.tsx",
-      "exportName": "Pitstop",
-      "registryName": "pitstop",
-      "landscape": true
-    },
-    {
       "id": "red-fire",
       "name": "Red Fire",
       "description": "ASCII flame animation in a red terminal style.",
@@ -80,6 +62,15 @@
       "exportName": "RedFire",
       "registryName": "red-fire",
       "landscape": false
+    },
+    {
+      "id": "train",
+      "name": "train",
+      "description": "...",
+      "fileName": "train.tsx",
+      "exportName": "Train",
+      "registryName": "train",
+      "landscape": true
     }
   ],
   "special": []
