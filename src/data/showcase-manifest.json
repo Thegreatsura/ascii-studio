@@ -1,0 +1,77 @@
+{
+  "regular": [
+    {
+      "id": "train",
+      "name": "train",
+      "description": "...",
+      "fileName": "train.tsx",
+      "exportName": "Train",
+      "registryName": "train",
+      "landscape": true
+    },
+    {
+      "id": "skull",
+      "name": "Skull",
+      "description": "ASCII animation of a skull.",
+      "fileName": "skull.tsx",
+      "exportName": "Skull",
+      "registryName": "skull",
+      "landscape": false
+    },
+    {
+      "id": "cd",
+      "name": "CD Animation",
+      "description": "ASCII animation of a CD spinning.",
+      "fileName": "cd.tsx",
+      "exportName": "Cd",
+      "registryName": "cd",
+      "landscape": false
+    },
+    {
+      "id": "rocket-blast",
+      "name": "Rocket Blast",
+      "description": "ASCII rocket blasting off with animated flames and smoke.",
+      "fileName": "rocket-blast.tsx",
+      "exportName": "RocketBlast",
+      "registryName": "rocket-blast-2",
+      "landscape": true
+    },
+    {
+      "id": "lightning",
+      "name": "Lightning",
+      "description": "ASCII animation of a Formula 1 pitstop with cars and crew.",
+      "fileName": "lightning.tsx",
+      "exportName": "Lightning",
+      "registryName": "lightning",
+      "landscape": false
+    },
+    {
+      "id": "sea-lines",
+      "name": "Sea Lines",
+      "description": "ASCII animation of a Formula 1 pitstop with cars and crew.",
+      "fileName": "sea-lines.tsx",
+      "exportName": "SeaLines",
+      "registryName": "sea-lines",
+      "landscape": false
+    },
+    {
+      "id": "pitstop",
+      "name": "Pitstop",
+      "description": "ASCII animation of a Formula 1 pitstop with cars and crew.",
+      "fileName": "pitstop.tsx",
+      "exportName": "Pitstop",
+      "registryName": "pitstop",
+      "landscape": true
+    },
+    {
+      "id": "red-fire",
+      "name": "Red Fire",
+      "description": "ASCII flame animation in a red terminal style.",
+      "fileName": "red-fire.tsx",
+      "exportName": "RedFire",
+      "registryName": "red-fire",
+      "landscape": false
+    }
+  ],
+  "special": []
+}

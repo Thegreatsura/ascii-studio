@@ -95,7 +95,16 @@ const Navbar = () => {
               <NavigationMenuItem>
                 <NavigationMenuLink className="px-4" asChild>
                   <Link
-                    href="/pricing"
+                    href="/#pricing"
+                    scroll={false}
+                    onClick={(e) => {
+                      if (window.location.pathname === "/") {
+                        e.preventDefault();
+                        document
+                          .getElementById("pricing")
+                          ?.scrollIntoView({ behavior: "smooth", block: "start" });
+                      }
+                    }}
                     className="text-sm hover:text-black text-muted-foreground transition-colors duration-300"
                   >
                     Pricing

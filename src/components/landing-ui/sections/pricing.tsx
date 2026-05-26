@@ -96,7 +96,10 @@ const Pricing = () => {
   ];
 
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div
+      id="pricing"
+      className="flex flex-col justify-center items-center scroll-mt-28"
+    >
       <div
         className="flex  p-1.5 justify-center items-center relative"
         style={{
