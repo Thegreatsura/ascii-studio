@@ -2,6 +2,7 @@ import { promises as fs } from "node:fs";
 import path from "node:path";
 import { createHash, timingSafeEqual } from "node:crypto";
 import { cookies } from "next/headers";
+import type { Change } from "./storage-adapter";
 
 export const AUTH_COOKIE = "dash-auth";
 
@@ -51,21 +52,43 @@ export type Manifest = {
 };
 
 const ROOT = process.cwd();
-const MANIFEST_PATH = path.join(ROOT, "src", "data", "showcase-manifest.json");
-const ASCII_DIR = path.join(ROOT, "src", "components", "ascii");
-const REGISTRY_PATH = path.join(ASCII_DIR, "_registry.tsx");
+const MANIFEST_REL = "src/data/showcase-manifest.json";
+const ASCII_DIR_REL = "src/components/ascii";
+const REGISTRY_REL = `${ASCII_DIR_REL}/_registry.tsx`;
+const MANIFEST_PATH = path.join(ROOT, MANIFEST_REL);
+const ASCII_DIR = path.join(ROOT, ASCII_DIR_REL);
 
 export async function readManifest(): Promise<Manifest> {
   const raw = await fs.readFile(MANIFEST_PATH, "utf8");
   return JSON.parse(raw) as Manifest;
 }
 
-export async function writeManifest(manifest: Manifest): Promise<void> {
-  await fs.writeFile(
-    MANIFEST_PATH,
-    JSON.stringify(manifest, null, 2) + "\n",
-    "utf8",
-  );
+function serializeManifest(manifest: Manifest): string {
+  return JSON.stringify(manifest, null, 2) + "\n";
+}
+
+export function manifestWriteChange(manifest: Manifest): Change {
+  return { op: "write", path: MANIFEST_REL, content: serializeManifest(manifest) };
+}
+
+export function registryWriteChange(manifest: Manifest): Change {
+  return { op: "write", path: REGISTRY_REL, content: buildRegistrySource(manifest) };
+}
+
+export function asciiWriteChange(fileName: string, content: string): Change {
+  validateAsciiFileName(fileName);
+  return { op: "write", path: `${ASCII_DIR_REL}/${fileName}`, content };
+}
+
+export function asciiDeleteChange(fileName: string): Change {
+  validateAsciiFileName(fileName);
+  return { op: "delete", path: `${ASCII_DIR_REL}/${fileName}` };
+}
+
+function validateAsciiFileName(fileName: string): void {
+  if (!/^[a-z0-9-]+\.tsx$/i.test(fileName)) {
+    throw new Error(`Invalid fileName: ${fileName}`);
+  }
 }
 
 export function slugify(input: string): string {
@@ -182,27 +205,9 @@ ${special}
 `;
 }
 
-export async function regenerateRegistry(manifest: Manifest): Promise<void> {
-  const source = buildRegistrySource(manifest);
-  await fs.writeFile(REGISTRY_PATH, source, "utf8");
-}
-
 export async function readAsciiFile(fileName: string): Promise<string> {
   const filePath = resolveAsciiFilePath(fileName);
   return fs.readFile(filePath, "utf8");
-}
-
-export async function writeAsciiFile(
-  fileName: string,
-  content: string,
-): Promise<void> {
-  const filePath = resolveAsciiFilePath(fileName);
-  await fs.writeFile(filePath, content, "utf8");
-}
-
-export async function deleteAsciiFile(fileName: string): Promise<void> {
-  const filePath = resolveAsciiFilePath(fileName);
-  await fs.unlink(filePath);
 }
 
 export function findItem(

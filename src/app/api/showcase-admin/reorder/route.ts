@@ -1,11 +1,12 @@
 import { NextResponse } from "next/server";
 import {
   isAuthed,
+  manifestWriteChange,
   readManifest,
-  regenerateRegistry,
-  writeManifest,
+  registryWriteChange,
   type ShowcaseType,
 } from "@/lib/showcase-admin";
+import { applyChanges } from "@/lib/storage-adapter";
 
 export const runtime = "nodejs";
 
@@ -54,8 +55,10 @@ export async function POST(req: Request) {
     }
 
     manifest[body.type] = reordered as typeof current;
-    await writeManifest(manifest);
-    await regenerateRegistry(manifest);
+    await applyChanges(
+      [manifestWriteChange(manifest), registryWriteChange(manifest)],
+      `studio: reorder ${body.type}`,
+    );
 
     return NextResponse.json({ ok: true });
   } catch (err) {

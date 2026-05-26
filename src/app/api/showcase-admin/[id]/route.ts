@@ -1,16 +1,17 @@
 import { NextResponse } from "next/server";
 import {
-  deleteAsciiFile,
+  asciiDeleteChange,
+  asciiWriteChange,
   findItem,
   isAuthed,
+  manifestWriteChange,
   readAsciiFile,
   readManifest,
-  regenerateRegistry,
+  registryWriteChange,
   validateTsx,
-  writeAsciiFile,
-  writeManifest,
   type ShowcaseType,
 } from "@/lib/showcase-admin";
+import { applyChanges, type Change } from "@/lib/storage-adapter";
 
 export const runtime = "nodejs";
 
@@ -80,9 +81,11 @@ export async function PUT(req: Request, ctx: RouteContext) {
       item.registryName = body.registryName.trim();
     }
 
+    const changes: Change[] = [];
+
     if (typeof body.tsxContent === "string" && body.tsxContent.trim()) {
       validateTsx(body.tsxContent, item.exportName);
-      await writeAsciiFile(item.fileName, body.tsxContent);
+      changes.push(asciiWriteChange(item.fileName, body.tsxContent));
     }
 
     if (nextType !== type) {
@@ -93,8 +96,10 @@ export async function PUT(req: Request, ctx: RouteContext) {
       if (idx >= 0) manifest[type][idx] = item;
     }
 
-    await writeManifest(manifest);
-    await regenerateRegistry(manifest);
+    changes.push(manifestWriteChange(manifest));
+    changes.push(registryWriteChange(manifest));
+
+    await applyChanges(changes, `studio: update ${item.name}`);
 
     return NextResponse.json({ ok: true, item, type: nextType });
   } catch (err) {
@@ -117,14 +122,15 @@ export async function DELETE(_req: Request, ctx: RouteContext) {
     const { item, type } = found;
 
     manifest[type] = manifest[type].filter((i) => i.id !== id);
-    await writeManifest(manifest);
-    await regenerateRegistry(manifest);
 
-    try {
-      await deleteAsciiFile(item.fileName);
-    } catch {
-      // file may already be gone; ignore
-    }
+    await applyChanges(
+      [
+        asciiDeleteChange(item.fileName),
+        manifestWriteChange(manifest),
+        registryWriteChange(manifest),
+      ],
+      `studio: delete ${item.name}`,
+    );
 
     return NextResponse.json({ ok: true });
   } catch (err) {

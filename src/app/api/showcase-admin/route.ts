@@ -1,17 +1,18 @@
 import { NextResponse } from "next/server";
 import {
+  asciiWriteChange,
   isAuthed,
   isIdTaken,
+  manifestWriteChange,
   pascalCase,
   readManifest,
-  regenerateRegistry,
+  registryWriteChange,
   slugify,
   validateTsx,
-  writeAsciiFile,
-  writeManifest,
   type ShowcaseItem,
   type ShowcaseType,
 } from "@/lib/showcase-admin";
+import { applyChanges } from "@/lib/storage-adapter";
 
 export const runtime = "nodejs";
 
@@ -99,10 +100,15 @@ export async function POST(req: Request) {
       landscape: !!body.landscape,
     };
 
-    await writeAsciiFile(item.fileName, body.tsxContent);
     manifest[body.type].push(item);
-    await writeManifest(manifest);
-    await regenerateRegistry(manifest);
+    await applyChanges(
+      [
+        asciiWriteChange(item.fileName, body.tsxContent),
+        manifestWriteChange(manifest),
+        registryWriteChange(manifest),
+      ],
+      `studio: add ${item.name}`,
+    );
 
     return NextResponse.json({ ok: true, item, type: body.type });
   } catch (err) {
