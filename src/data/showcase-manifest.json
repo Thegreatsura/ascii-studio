@@ -7,7 +7,7 @@
       "fileName": "train.tsx",
       "exportName": "Train",
       "registryName": "train",
-      "landscape": true
+      "landscape": false
     },
     {
       "id": "skull",
