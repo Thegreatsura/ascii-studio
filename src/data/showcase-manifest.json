@@ -1,6 +1,15 @@
 {
   "regular": [
     {
+      "id": "train",
+      "name": "train",
+      "description": "...",
+      "fileName": "train.tsx",
+      "exportName": "Train",
+      "registryName": "train",
+      "landscape": true
+    },
+    {
       "id": "car",
       "name": "car",
       "description": "....",
@@ -34,15 +43,6 @@
       "fileName": "rocket-blast.tsx",
       "exportName": "RocketBlast",
       "registryName": "rocket-blast-2",
-      "landscape": true
-    },
-    {
-      "id": "train",
-      "name": "train",
-      "description": "...",
-      "fileName": "train.tsx",
-      "exportName": "Train",
-      "registryName": "train",
       "landscape": true
     },
     {
