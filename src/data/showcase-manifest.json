@@ -10,6 +10,15 @@
       "landscape": true
     },
     {
+      "id": "rocket-blast",
+      "name": "Rocket Blast",
+      "description": "ASCII rocket blasting off with animated flames and smoke.",
+      "fileName": "rocket-blast.tsx",
+      "exportName": "RocketBlast",
+      "registryName": "rocket-blast-2",
+      "landscape": true
+    },
+    {
       "id": "skull",
       "name": "Skull",
       "description": "ASCII animation of a skull.",
@@ -25,15 +34,6 @@
       "fileName": "cd.tsx",
       "exportName": "Cd",
       "registryName": "cd",
-      "landscape": false
-    },
-    {
-      "id": "rocket-blast",
-      "name": "Rocket Blast",
-      "description": "ASCII rocket blasting off with animated flames and smoke.",
-      "fileName": "rocket-blast.tsx",
-      "exportName": "RocketBlast",
-      "registryName": "rocket-blast-2",
       "landscape": false
     },
     {
