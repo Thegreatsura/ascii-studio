@@ -122,6 +122,17 @@ const Navbar = () => {
                   </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                <NavigationMenuLink className="px-4" asChild>
+                  <Link
+                    href="/upload"
+                    className="text-sm hover:text-black text-muted-foreground transition-colors duration-300"
+                  >
+                    Upload
+                  </Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
         </section>
@@ -194,6 +205,13 @@ const Navbar = () => {
             onClick={() => setMobileMenuOpen(false)}
           >
             Showcase
+          </Link>
+          <Link
+            href="/upload"
+            className="py-2.5 px-3 rounded-xl hover:bg-accent text-sm font-medium transition-colors"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Upload
           </Link>
           <div className="flex gap-2 pt-2 border-t border-border mt-1">
             <div className="relative group/star flex-1 flex items-center justify-center">
