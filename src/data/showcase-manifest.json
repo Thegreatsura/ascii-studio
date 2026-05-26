@@ -1,15 +1,6 @@
 {
   "regular": [
     {
-      "id": "car",
-      "name": "car",
-      "description": "....",
-      "fileName": "car.tsx",
-      "exportName": "Car",
-      "registryName": "car",
-      "landscape": true
-    },
-    {
       "id": "skull",
       "name": "Skull",
       "description": "ASCII animation of a skull.",
@@ -34,7 +25,16 @@
       "fileName": "rocket-blast.tsx",
       "exportName": "RocketBlast",
       "registryName": "rocket-blast-2",
-      "landscape": false
+      "landscape": true
+    },
+    {
+      "id": "car",
+      "name": "car",
+      "description": "....",
+      "fileName": "car.tsx",
+      "exportName": "Car",
+      "registryName": "car",
+      "landscape": true
     },
     {
       "id": "train",
@@ -55,6 +55,15 @@
       "landscape": false
     },
     {
+      "id": "red-fire",
+      "name": "Red Fire",
+      "description": "ASCII flame animation in a red terminal style.",
+      "fileName": "red-fire.tsx",
+      "exportName": "RedFire",
+      "registryName": "red-fire",
+      "landscape": false
+    },
+    {
       "id": "sea-lines",
       "name": "Sea Lines",
       "description": "ASCII animation of a Formula 1 pitstop with cars and crew.",
@@ -71,15 +80,6 @@
       "exportName": "Pitstop",
       "registryName": "pitstop",
       "landscape": true
-    },
-    {
-      "id": "red-fire",
-      "name": "Red Fire",
-      "description": "ASCII flame animation in a red terminal style.",
-      "fileName": "red-fire.tsx",
-      "exportName": "RedFire",
-      "registryName": "red-fire",
-      "landscape": false
     }
   ],
   "special": []
