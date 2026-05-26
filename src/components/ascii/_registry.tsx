@@ -29,7 +29,7 @@ export const regularAnimations: AnimationItem[] = [
     name: "train",
     description: "...",
     registryName: "train",
-    landscape: false,
+    landscape: true,
     render: () => <Train />,
   },
   {
