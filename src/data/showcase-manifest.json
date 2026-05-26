@@ -1,6 +1,15 @@
 {
   "regular": [
     {
+      "id": "car",
+      "name": "car",
+      "description": "....",
+      "fileName": "car.tsx",
+      "exportName": "Car",
+      "registryName": "car",
+      "landscape": true
+    },
+    {
       "id": "skull",
       "name": "Skull",
       "description": "ASCII animation of a skull.",
@@ -25,16 +34,7 @@
       "fileName": "rocket-blast.tsx",
       "exportName": "RocketBlast",
       "registryName": "rocket-blast-2",
-      "landscape": true
-    },
-    {
-      "id": "car",
-      "name": "car",
-      "description": "....",
-      "fileName": "car.tsx",
-      "exportName": "Car",
-      "registryName": "car",
-      "landscape": true
+      "landscape": false
     },
     {
       "id": "train",
