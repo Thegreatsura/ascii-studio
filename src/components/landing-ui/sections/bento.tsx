@@ -53,8 +53,7 @@ const Bento = () => {
             }}
           >
             <div
-              className="flex justify-between flex-col h-full
-            "
+              className="flex justify-between flex-col h-full"
             >
               <div className=" h-full">
                 <MagnifiedBento />
@@ -79,8 +78,7 @@ const Bento = () => {
             }}
           >
             <div
-              className="flex justify-between flex-col h-full
-            "
+              className="flex justify-between flex-col h-full"
             >
               <div className="h-full flex z-30 justify-center items-center">
                 <ImagesBadgeDemoFour />
