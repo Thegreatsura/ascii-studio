@@ -8,11 +8,11 @@ Customize density, contrast, and character sets to generate unique outputs, all 
 
 ## Sponsors
 
-<p>
-  <a href="https://vercel.com" target="_blank">
-    <img src="https://assets.vercel.com/image/upload/front/favicon/vercel/180x180.png" alt="Vercel" height="50" />
-  </a>
-</p>
+<br />
+<br />
+<a href="https://vercel.com/open-source-program">
+  <img alt="Vercel OSS Program" src="https://vercel.com/oss/program-badge-2026.svg" />
+</a>
 
 ---
 
