@@ -120,11 +120,6 @@ export default function Navbar() {
             </div>
           )}
         </div>
-        {/* <Link target="_blank" href={"https://x.com/vansh1029"}>
-            <Button variant="outline" size="icon">
-              <svg ... />
-            </Button>
-          </Link> */}
         <ModeToggle />
       </nav>
     </header>

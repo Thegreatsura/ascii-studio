@@ -2,9 +2,19 @@ import { promises as fs } from "node:fs";
 import path from "node:path";
 import { createHash, timingSafeEqual } from "node:crypto";
 import { cookies } from "next/headers";
+import { NextResponse } from "next/server";
 import type { Change } from "./storage-adapter";
 
 export const AUTH_COOKIE = "dash-auth";
+
+// Re-export the client-safe string helpers so existing server-side callers
+// (API routes) keep importing them from this module.
+export { slugify, pascalCase } from "./slug";
+
+/** Standard 401 response shared by the showcase-admin API routes. */
+export function unauthorized() {
+  return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+}
 
 function hashPassword(pw: string): string {
   return createHash("sha256").update(pw).digest("hex");
@@ -89,26 +99,6 @@ function validateAsciiFileName(fileName: string): void {
   if (!/^[a-z0-9-]+\.tsx$/i.test(fileName)) {
     throw new Error(`Invalid fileName: ${fileName}`);
   }
-}
-
-export function slugify(input: string): string {
-  return input
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9-\s]/g, "")
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-")
-    .replace(/^-|-$/g, "");
-}
-
-export function pascalCase(input: string): string {
-  return input
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, "")
-    .split(/[\s-]+/)
-    .filter(Boolean)
-    .map((part) => part[0].toUpperCase() + part.slice(1))
-    .join("");
 }
 
 export function resolveAsciiFilePath(fileName: string): string {

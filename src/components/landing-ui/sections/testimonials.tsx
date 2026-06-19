@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight, Crown } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import TestimonialCard from "./testimonial-card";
+import { BRAND_GRADIENT } from "@/lib/constants";
 
 // ─── Add your tweet URLs here ────────────────────────────────────────────────
 const TWEET_URLS = [
@@ -33,8 +34,7 @@ const CardSkeleton = () => (
   <div
     className="relative p-5 w-full flex flex-col gap-5 animate-pulse"
     style={{
-      background:
-        "radial-gradient(152.32% 683.53% at 108.86% 152.32%, #6395FF 0%, #F3F7FF 100%)",
+      background: BRAND_GRADIENT,
       borderRadius: "24px",
     }}
   >
@@ -77,8 +77,7 @@ const TweetCard = ({ tweetUrl }: { tweetUrl: string }) => {
       <div
         className="relative p-5 w-full flex items-center justify-center text-sm text-muted-foreground h-40"
         style={{
-          background:
-            "radial-gradient(152.32% 683.53% at 108.86% 152.32%, #6395FF 0%, #F3F7FF 100%)",
+          background: BRAND_GRADIENT,
           borderRadius: "24px",
         }}
       >

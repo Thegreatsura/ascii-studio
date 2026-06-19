@@ -1,4 +1,3 @@
-import React from "react";
 import Navbar from "@/components/landing-ui/navbar";
 import Bento from "@/components/landing-ui/sections/bento";
 import Faq from "@/components/landing-ui/sections/faq";

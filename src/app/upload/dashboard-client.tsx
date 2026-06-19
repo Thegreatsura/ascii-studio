@@ -41,6 +41,7 @@ import {
   Loader2,
 } from "lucide-react";
 import { Reorder, useDragControls } from "motion/react";
+import { slugify, pascalCase } from "@/lib/slug";
 
 const VERCEL_PROJECT_URL =
   "https://vercel.com/vansh-nagars-projects-657b6c87/ascii-studio";
@@ -73,26 +74,6 @@ type PushStatus = "idle" | "pushing" | "success" | "error";
 
 function manifestsEqual(a: Manifest, b: Manifest): boolean {
   return JSON.stringify(a) === JSON.stringify(b);
-}
-
-function slugify(input: string): string {
-  return input
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9-\s]/g, "")
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-")
-    .replace(/^-|-$/g, "");
-}
-
-function pascalCase(input: string): string {
-  return input
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, "")
-    .split(/[\s-]+/)
-    .filter(Boolean)
-    .map((part) => part[0].toUpperCase() + part.slice(1))
-    .join("");
 }
 
 function DraggableCard({

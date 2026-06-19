@@ -8,6 +8,7 @@ import {
   readManifest,
   registryWriteChange,
   slugify,
+  unauthorized,
   validateTsx,
   type ShowcaseItem,
   type ShowcaseType,
@@ -15,10 +16,6 @@ import {
 import { applyChanges } from "@/lib/storage-adapter";
 
 export const runtime = "nodejs";
-
-function unauthorized() {
-  return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-}
 
 export async function GET() {
   if (!(await isAuthed())) return unauthorized();
