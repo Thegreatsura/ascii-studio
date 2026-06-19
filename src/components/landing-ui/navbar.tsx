@@ -6,9 +6,11 @@ import { Button } from "../ui/button";
 import { ChevronRight, Menu, X } from "lucide-react";
 import {
   NavigationMenu,
+  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
+  NavigationMenuTrigger,
 } from "../ui/navigation-menu";
 
 
@@ -92,6 +94,27 @@ const Navbar = () => {
           </Link>
           <NavigationMenu className="z-50 hidden lg:flex">
             <NavigationMenuList>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="px-4 h-auto bg-transparent text-sm font-normal text-muted-foreground hover:text-black data-[state=open]:text-black hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent">
+                  Tools
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  {/* TODO: populate Tools dropdown items — pending instructions */}
+                  <ul className="grid w-[220px] gap-1 p-2">
+                    <li>
+                      <NavigationMenuLink asChild>
+                        <Link
+                          href="#"
+                          className="block rounded-md px-3 py-2 text-sm text-muted-foreground hover:text-black hover:bg-accent transition-colors"
+                        >
+                          Coming soon
+                        </Link>
+                      </NavigationMenuLink>
+                    </li>
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+
               <NavigationMenuItem>
                 <NavigationMenuLink className="px-4" asChild>
                   <Link
