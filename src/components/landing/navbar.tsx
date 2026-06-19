@@ -2,13 +2,13 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Github } from "lucide-react";
+import { Github } from "@/components/icons/duotone";
 import { Button } from "../ui/button";
 import { StarsCount } from "./stars-count";
 import { ModeToggle } from "./theme-toggle";
 
 import { useSearch } from "./search-context";
-import { Search } from "lucide-react";
+import { Search } from "@/components/icons/duotone";
 import { Input } from "../ui/input";
 
 export default function Navbar() {

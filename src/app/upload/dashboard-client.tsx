@@ -39,7 +39,7 @@ import {
   CloudUpload,
   ExternalLink,
   Loader2,
-} from "lucide-react";
+} from "@/components/icons/duotone";
 import { Reorder, useDragControls } from "motion/react";
 import { slugify, pascalCase } from "@/lib/slug";
 

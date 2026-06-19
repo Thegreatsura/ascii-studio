@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { motion } from "framer-motion";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight } from "@/components/icons/duotone";
 import NumberFlow from "@number-flow/react";
 import StudioUiPreview from "@/components/studio-ui-preview";
 import TextYAnimation4 from "@/components/pixel-perfect/text-y-animation4";

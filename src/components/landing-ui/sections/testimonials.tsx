@@ -1,5 +1,5 @@
 "use client";
-import { ChevronLeft, ChevronRight, Crown } from "lucide-react";
+import { ChevronLeft, ChevronRight, Crown } from "@/components/icons/duotone";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import TestimonialCard from "./testimonial-card";

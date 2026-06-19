@@ -3,7 +3,7 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { Button } from "../ui/button";
-import { ChevronRight, Menu, X } from "lucide-react";
+import { ChevronRight, Menu, X } from "@/components/icons/duotone";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -12,6 +12,40 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "../ui/navigation-menu";
+import {
+  DocumentationIcon,
+  ShowcaseIcon,
+  StudioIcon,
+  UploadIcon,
+} from "./icons/tools";
+
+// TODO: confirm final labels/links/copy for the Tools menu — placeholders for now.
+const toolsMenu = [
+  {
+    title: "Studio",
+    description: "Turn videos into ASCII art.",
+    href: "https://tool.asciistudio.space/studio",
+    icon: StudioIcon,
+  },
+  {
+    title: "Showcase",
+    description: "Browse community animations.",
+    href: "/showcase",
+    icon: ShowcaseIcon,
+  },
+  {
+    title: "Upload",
+    description: "Publish your own creations.",
+    href: "/upload",
+    icon: UploadIcon,
+  },
+  {
+    title: "Documentation",
+    description: "Guides and component registry.",
+    href: "#",
+    icon: DocumentationIcon,
+  },
+];
 
 
 const Navbar = () => {
@@ -99,18 +133,29 @@ const Navbar = () => {
                   Tools
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  {/* TODO: populate Tools dropdown items — pending instructions */}
-                  <ul className="grid w-[220px] gap-1 p-2">
-                    <li>
-                      <NavigationMenuLink asChild>
-                        <Link
-                          href="#"
-                          className="block rounded-md px-3 py-2 text-sm text-muted-foreground hover:text-black hover:bg-accent transition-colors"
+                  <ul className="grid w-[440px] gap-0.5 p-1" style={{ zoom: 0.8 }}>
+                    {toolsMenu.map((item) => (
+                      <li key={item.title}>
+                        <NavigationMenuLink
+                          asChild
+                          className="group flex items-center gap-4 rounded-2xl p-1.5 transition-colors hover:bg-neutral-100 focus:bg-neutral-100"
                         >
-                          Coming soon
-                        </Link>
-                      </NavigationMenuLink>
-                    </li>
+                          <Link href={item.href}>
+                            <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-neutral-100 text-neutral-400 transition-colors group-hover:bg-neutral-200/70 group-hover:text-neutral-500">
+                              <item.icon className="size-7" />
+                            </span>
+                            <span className="flex flex-col gap-1">
+                              <span className="text-lg font-semibold leading-none text-foreground">
+                                {item.title}
+                              </span>
+                              <span className="text-[15px] leading-snug text-muted-foreground">
+                                {item.description}
+                              </span>
+                            </span>
+                          </Link>
+                        </NavigationMenuLink>
+                      </li>
+                    ))}
                   </ul>
                 </NavigationMenuContent>
               </NavigationMenuItem>

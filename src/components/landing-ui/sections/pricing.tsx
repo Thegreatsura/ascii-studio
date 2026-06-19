@@ -1,5 +1,5 @@
 "use client";
-import { Check } from "lucide-react";
+import { Check } from "@/components/icons/duotone";
 import React, { useState } from "react";
 import { AnimatePresence, motion, type Variants } from "framer-motion";
 import { Button } from "@/components/ui/button";

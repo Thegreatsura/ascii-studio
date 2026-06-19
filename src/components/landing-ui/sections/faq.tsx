@@ -1,6 +1,6 @@
 import { CustomAccordion } from "@/components/custom-accordion";
 import { Button } from "@/components/ui/button";
-import { MessageCircleMore } from "lucide-react";
+import { MessageCircleMore } from "@/components/icons/duotone";
 import React from "react";
 
 type FAQItem = {

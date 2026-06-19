@@ -1,5 +1,5 @@
 "use client";
-import { Atom, ChevronRight } from "lucide-react";
+import { Atom, ChevronRight } from "@/components/icons/duotone";
 import { motion } from "framer-motion";
 import React from "react";
 import Link from "next/link";

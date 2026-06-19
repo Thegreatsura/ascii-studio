@@ -7,7 +7,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Copy, Check } from "lucide-react";
+import { Copy, Check } from "@/components/icons/duotone";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Button } from "../ui/button";

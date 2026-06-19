@@ -8,7 +8,7 @@ import {
   RotateCcw,
   Search,
   Upload,
-} from "lucide-react";
+} from "@/components/icons/duotone";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

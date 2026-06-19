@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight } from "@/components/icons/duotone";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";

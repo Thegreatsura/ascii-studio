@@ -1,4 +1,4 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "@/components/icons/duotone";
 import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { BRAND_GRADIENT } from "@/lib/constants";
