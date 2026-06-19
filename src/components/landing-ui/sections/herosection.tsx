@@ -514,19 +514,6 @@ const HeroSection = () => {
         height={1080}
         priority
       />
-      <div className="h-screen absolute top-0 w-full">
-        {" "}
-        {/* <div
-          style={{
-            WebkitMaskImage:
-              "linear-gradient(to bottom, black 60%, transparent 90%)",
-            maskImage: "linear-gradient(to bottom, black 60%, transparent 90%)",
-          }}
-          className=" absolute -bottom-[12%] pointer-events-none"
-        >
-          <Fire />
-        </div> */}
-      </div>{" "}
     </>
   );
 };

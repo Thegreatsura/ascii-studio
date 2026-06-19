@@ -7,6 +7,7 @@ import {
   pascalCase,
   registryWriteChange,
   slugify,
+  unauthorized,
   validateTsx,
   type Manifest,
   type ShowcaseItem,
@@ -14,10 +15,6 @@ import {
 import { applyChanges, type Change } from "@/lib/storage-adapter";
 
 export const runtime = "nodejs";
-
-function unauthorized() {
-  return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-}
 
 type PushBody = {
   manifest: Manifest;

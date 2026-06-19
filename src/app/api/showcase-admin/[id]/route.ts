@@ -8,16 +8,13 @@ import {
   readAsciiFile,
   readManifest,
   registryWriteChange,
+  unauthorized,
   validateTsx,
   type ShowcaseType,
 } from "@/lib/showcase-admin";
 import { applyChanges, type Change } from "@/lib/storage-adapter";
 
 export const runtime = "nodejs";
-
-function unauthorized() {
-  return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-}
 
 type RouteContext = { params: Promise<{ id: string }> };
 

@@ -17,32 +17,6 @@
       ]
     },
     {
-      "name": "star-animation",
-      "type": "registry:block",
-      "title": "Star Animation",
-      "description": "ASCII animation of a star.",
-      "files": [
-        {
-          "path": "src/components/ascii/star.tsx",
-          "type": "registry:component",
-          "target": "components/ascii/star.tsx"
-        }
-      ]
-    },
-    {
-      "name": "rainbow-fire",
-      "type": "registry:block",
-      "title": "Rainbow Fire",
-      "description": "ASCII rainbow fire animation.",
-      "files": [
-        {
-          "path": "src/components/ascii/rainbow-fire.tsx",
-          "type": "registry:component",
-          "target": "components/ascii/rainbow-fire.tsx"
-        }
-      ]
-    },
-    {
       "name": "pitstop",
       "type": "registry:block",
       "title": "Pit Stop",
@@ -67,75 +41,45 @@
           "target": "components/ascii/cd.tsx"
         }
       ]
+    },
+    {
+      "name": "rocket-blast",
+      "type": "registry:block",
+      "title": "Rocket Blast",
+      "description": "ASCII rocket blasting off with animated flames and smoke.",
+      "files": [
+        {
+          "path": "src/components/ascii/rocket-blast.tsx",
+          "type": "registry:component",
+          "target": "components/ascii/rocket-blast.tsx"
+        }
+      ]
+    },
+    {
+      "name": "rocket-blast-2",
+      "type": "registry:block",
+      "title": "Rocket Blast 2",
+      "description": "ASCII rocket blasting off with animated flames and smoke (variant 2).",
+      "files": [
+        {
+          "path": "src/components/ascii/rocket-blast.tsx",
+          "type": "registry:component",
+          "target": "components/ascii/rocket-blast.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sea-lines",
+      "type": "registry:block",
+      "title": "Sea Lines",
+      "description": "ASCII animation of a Formula 1 pitstop with cars and crew.",
+      "files": [
+        {
+          "path": "src/components/ascii/sea-lines.tsx",
+          "type": "registry:component",
+          "target": "components/ascii/sea-lines.tsx"
+        }
+      ]
     }
-     ,
-
-      {
-        "name": "dust",
-        "type": "registry:block",
-        "title": "Dust Animation",
-        "description": "ASCII swirling dust animation.",
-        "files": [
-          {
-            "path": "src/components/ascii/Dust.tsx",
-            "type": "registry:component",
-            "target": "components/ascii/Dust.tsx"
-          }
-        ]
-      },
-      {
-        "name": "balls",
-        "type": "registry:block",
-        "title": "Balls Animation",
-        "description": "ASCII animation of bouncing balls.",
-        "files": [
-          {
-            "path": "src/components/ascii/balls.tsx",
-            "type": "registry:component",
-            "target": "components/ascii/balls.tsx"
-          }
-        ]
-      }
-      ,
-      {
-        "name": "rocket-blast",
-        "type": "registry:block",
-        "title": "Rocket Blast",
-        "description": "ASCII rocket blasting off with animated flames and smoke.",
-        "files": [
-          {
-            "path": "src/components/ascii/rocket-blast.tsx",
-            "type": "registry:component",
-            "target": "components/ascii/rocket-blast.tsx"
-          }
-        ]
-      }
-      ,
-      {
-        "name": "rocket-blast-2",
-        "type": "registry:block",
-        "title": "Rocket Blast 2",
-        "description": "ASCII rocket blasting off with animated flames and smoke (variant 2).",
-        "files": [
-          {
-            "path": "src/components/ascii/rocket-blast.tsx",
-            "type": "registry:component",
-            "target": "components/ascii/rocket-blast.tsx"
-          }
-        ]
-      },
-      {
-        "name": "sea-lines",
-        "type": "registry:block",
-        "title": "Sea Lines",
-        "description": "ASCII animation of a Formula 1 pitstop with cars and crew.",
-        "files": [
-          {
-            "path": "src/components/ascii/sea-lines.tsx",
-            "type": "registry:component",
-            "target": "components/ascii/sea-lines.tsx"
-          }
-        ]
-      }
   ]
 }

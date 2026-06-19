@@ -126,7 +126,6 @@ export default function ASCIIAnimation({
         });
 
         const loadedFrames = await Promise.all(framePromises);
-        console.log(`Loaded ${loadedFrames.length} frames`);
         if (!isCancelled) {
           setFrames(loadedFrames);
           framesRef.current = loadedFrames;

@@ -4,15 +4,12 @@ import {
   manifestWriteChange,
   readManifest,
   registryWriteChange,
+  unauthorized,
   type ShowcaseType,
 } from "@/lib/showcase-admin";
 import { applyChanges } from "@/lib/storage-adapter";
 
 export const runtime = "nodejs";
-
-function unauthorized() {
-  return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-}
 
 type ReorderBody = {
   type: ShowcaseType;
