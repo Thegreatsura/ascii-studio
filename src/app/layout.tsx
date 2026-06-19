@@ -8,9 +8,15 @@ import { Agentation } from "agentation";
 const geistPixelGrid = GeistPixelGrid;
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://asciistudio.space"),
   title: "ascii studio",
   description: "ascii studio",
   openGraph: {
+    title: "ascii studio",
+    description: "ascii studio",
+    url: "https://asciistudio.space",
+    siteName: "ascii studio",
+    type: "website",
     images: [
       {
         url: "/og.png",
@@ -19,6 +25,12 @@ export const metadata: Metadata = {
         alt: "ascii studio OG image",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ascii studio",
+    description: "ascii studio",
+    images: ["/og.png"],
   },
   icons: {
     icon: [
