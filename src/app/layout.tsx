@@ -7,54 +7,105 @@ import { Agentation } from "agentation";
 
 const geistPixelGrid = GeistPixelGrid;
 
+const SITE_URL = "https://asciistudio.space";
+const SITE_NAME = "ascii studio";
+const SITE_TITLE = "ascii studio — Turn Videos into ASCII Art & Animations";
+const SITE_DESCRIPTION =
+  "Convert videos and images into real-time ASCII art and animations right in your browser. Customize density, contrast, and character sets, then export your creations.";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://asciistudio.space"),
-  title: "ascii studio",
-  description: "ascii studio",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: SITE_TITLE,
+    template: "%s — ascii studio",
+  },
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  keywords: [
+    "ascii art",
+    "ascii animation",
+    "video to ascii",
+    "ascii converter",
+    "ascii generator",
+    "ascii art maker",
+    "text art",
+    "ascii studio",
+  ],
+  authors: [{ name: "Vansh Nagar", url: "https://github.com/vansh-nagar" }],
+  creator: "Vansh Nagar",
+  category: "technology",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "ascii studio",
-    description: "ascii studio",
-    url: "https://asciistudio.space",
-    siteName: "ascii studio",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
+    siteName: SITE_NAME,
     type: "website",
+    locale: "en_US",
     images: [
       {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "ascii studio OG image",
+        alt: "ascii studio — turn videos into ASCII art and animations",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "ascii studio",
-    description: "ascii studio",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     images: ["/og.png"],
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   icons: {
-    icon: [
-      { url: "/favicon.ico" },
-      {
-        url: "/favicon/favicon-16x16.png",
-        sizes: "16x16",
-        type: "image/png",
-      },
-      {
-        url: "/favicon/favicon-32x32.png",
-        sizes: "32x32",
-        type: "image/png",
-      },
-    ],
-    apple: [
-      {
-        url: "/favicon/apple-touch-icon.png",
-        sizes: "180x180",
-        type: "image/png",
-      },
-    ],
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
   },
 };
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: SITE_NAME,
+    url: SITE_URL,
+    description: SITE_DESCRIPTION,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: SITE_NAME,
+    url: SITE_URL,
+    description: SITE_DESCRIPTION,
+    applicationCategory: "MultimediaApplication",
+    operatingSystem: "Any (Web)",
+    browserRequirements: "Requires a modern web browser",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+    },
+    author: {
+      "@type": "Person",
+      name: "Vansh Nagar",
+      url: "https://github.com/vansh-nagar",
+    },
+  },
+];
 
 export default function RootLayout({
   children,
@@ -85,6 +136,10 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <SearchProvider>
           {children}
           <Analytics />

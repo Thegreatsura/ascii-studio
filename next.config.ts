@@ -4,6 +4,15 @@ const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
   devIndicators: false,
+  async redirects() {
+    return [
+      {
+        source: "/landing",
+        destination: "/",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
