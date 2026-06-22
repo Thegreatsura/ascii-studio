@@ -24,7 +24,7 @@ const toolsMenu = [
   {
     title: "Studio",
     description: "Turn videos into ASCII art.",
-    href: "https://tool.asciistudio.space/studio",
+    href: "/studio",
     icon: StudioIcon,
   },
   {
