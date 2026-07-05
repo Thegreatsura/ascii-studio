@@ -1,41 +1,39 @@
-# Ascii Studio — Monorepo
+# ASCII Studio
 
-Bun workspaces + Turborepo. Currently one deployable app; structured to add more (e.g. a backend) later.
+Turn videos into high-performance real ASCII animations :)
 
-## Structure
+ASCII Studio processes video frames in real time and converts them into precise ASCII representations using an optimized rendering pipeline.
 
-```
-apps/
-  landing/            # The whole product — single Next.js app, single deploy
-    src/app/          #   marketing site: /, /showcase, /upload, /studio
-    src/app/tool/     #   the ASCII studio tool: /tool, /tool/studio, ...
-    src/tool/         #   tool components / lib / hooks (namespaced under @/tool)
-packages/             # (future) shared ui / config / utils
-```
+Customize density, contrast, and character sets to generate unique outputs, all without leaving the browser.
 
-The ASCII studio tool is served under **`/tool`** within the landing app, so the
-whole product ships as **one Vercel deployment on one domain**:
+## Sponsors
 
-- `asciistudio.space/` → landing
-- `asciistudio.space/tool` → tool home
-- `asciistudio.space/tool/studio` → the video → ASCII converter
+<a href="https://vercel.com/open-source-program">
+  <img alt="Vercel OSS Program" src="https://vercel.com/oss/program-badge-2026.svg" />
+</a>
 
-## Getting started
+---
 
-```bash
-bun install
-bun run dev        # http://localhost:3000  (auto-picks a free port if busy)
-```
+## Powered by Vercel
 
-## Tasks
+<img src="https://github.com/user-attachments/assets/5bc3b368-d71a-48aa-b45f-67cbf49fe538" />
 
-```bash
-bun run build      # production build (Turborepo)
-bun run lint
-```
+---
 
-## Deploy (Vercel)
+## Preview
 
-One project, **Root Directory = `apps/landing`**. Vercel auto-detects Next.js +
-Turborepo + Bun. Set the landing env vars (`DASHBOARD_PASSWORD`, `GITHUB_TOKEN`,
-`GITHUB_OWNER`, `GITHUB_REPO`, `GITHUB_BRANCH`) in the project settings.
+<img width="1853" height="967" alt="image" src="https://github.com/user-attachments/assets/1f2b3c3e-c98c-49e1-9347-c0a64d070608" />
+
+https://github.com/user-attachments/assets/1537e97a-ff49-42f6-8d42-dd3fcdaa280f
+
+---
+
+## Star History
+
+<a href="https://www.star-history.com/?repos=vansh-nagar%2Fascii-studio&type=date&legend=top-left">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/image?repos=vansh-nagar/ascii-studio&type=date&theme=dark&legend=top-left" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/image?repos=vansh-nagar/ascii-studio&type=date&legend=top-left" />
+    <img alt="Star History Chart" src="https://api.star-history.com/image?repos=vansh-nagar/ascii-studio&type=date&legend=top-left" />
+  </picture>
+</a>
