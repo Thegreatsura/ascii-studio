@@ -11,9 +11,7 @@
     "dev": "turbo run dev",
     "build": "turbo run build",
     "start": "turbo run start",
-    "lint": "turbo run lint",
-    "landing": "turbo run dev --filter=@ascii-studio/landing",
-    "tool": "turbo run dev --filter=@ascii-studio/ascii-tool"
+    "lint": "turbo run lint"
   },
   "devDependencies": {
     "turbo": "^2"
