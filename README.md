@@ -1,39 +1,36 @@
-# ASCII Studio
+# Ascii Studio — Monorepo
 
-Turn videos into high-performance real ASCII animations :)
+Bun workspaces + Turborepo monorepo for the Ascii Studio product.
 
-ASCII Studio processes video frames in real time and converts them into precise ASCII representations using an optimized rendering pipeline.
+## Structure
 
-Customize density, contrast, and character sets to generate unique outputs, all without leaving the browser.
+```
+apps/
+  landing/     # Marketing site: landing, showcase, upload + shadcn registry (Next.js)
+  ascii-tool/  # The ASCII studio tool: video → ASCII converter (Next.js)
+packages/      # (future) shared ui / config / utils
+```
 
-## Sponsors
+## Getting started
 
-<a href="https://vercel.com/open-source-program">
-  <img alt="Vercel OSS Program" src="https://vercel.com/oss/program-badge-2026.svg" />
-</a>
+```bash
+bun install        # install all workspaces
+bun run dev        # run every app in parallel (Turborepo)
+```
 
----
+- Landing → http://localhost:3000
+- Ascii tool → http://localhost:3001
 
-## Powered by Vercel
+## Run a single app
 
-<img src="https://github.com/user-attachments/assets/5bc3b368-d71a-48aa-b45f-67cbf49fe538" />
+```bash
+bun run landing    # just the landing site
+bun run tool       # just the ascii tool
+```
 
----
+## Other tasks
 
-## Preview
-
-<img width="1853" height="967" alt="image" src="https://github.com/user-attachments/assets/1f2b3c3e-c98c-49e1-9347-c0a64d070608" />
-
-https://github.com/user-attachments/assets/1537e97a-ff49-42f6-8d42-dd3fcdaa280f
-
----
-
-## Star History
-
-<a href="https://www.star-history.com/?repos=vansh-nagar%2Fascii-studio&type=date&legend=top-left">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/image?repos=vansh-nagar/ascii-studio&type=date&theme=dark&legend=top-left" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/image?repos=vansh-nagar/ascii-studio&type=date&legend=top-left" />
-    <img alt="Star History Chart" src="https://api.star-history.com/image?repos=vansh-nagar/ascii-studio&type=date&legend=top-left" />
-  </picture>
-</a>
+```bash
+bun run build      # build all apps
+bun run lint       # lint all apps
+```

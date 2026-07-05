@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/catal/OneDrive/Desktop/mvp/projects/main-projects/ascii-studio/ascii-studio-tool/**)",
+      "Read(//c/Users/catal/OneDrive/Desktop/mvp/projects/main-projects/ascii-studio/ascii-studio-tool/components/**)"
+    ]
+  }
+}
