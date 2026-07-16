@@ -19,6 +19,10 @@ const PixelDistortion = ({
   brush = 0.125,
   maxPush = 8,
   momentum = 0.9,
+  rgbShift = 0,
+  pixelate = 0,
+  wander = false,
+  wanderSpeed = 1,
 }: {
   image: string;
   className?: string;
@@ -38,6 +42,14 @@ const PixelDistortion = ({
   maxPush?: number;
   /** cursor velocity carry-over */
   momentum?: number;
+  /** chromatic aberration along the smear (0 = off) */
+  rgbShift?: number;
+  /** mosaic cell count (0 = off, else cells per axis) */
+  pixelate?: number;
+  /** autonomous ghost cursor that keeps the image swirling */
+  wander?: boolean;
+  /** ghost cursor speed multiplier */
+  wanderSpeed?: number;
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -48,6 +60,10 @@ const PixelDistortion = ({
   const brushRef = useRef(brush);
   const maxPushRef = useRef(maxPush);
   const momentumRef = useRef(momentum);
+  const rgbShiftRef = useRef(rgbShift);
+  const pixelateRef = useRef(pixelate);
+  const wanderRef = useRef(wander);
+  const wanderSpeedRef = useRef(wanderSpeed);
 
   useEffect(() => void (strengthRef.current = strength), [strength]);
   useEffect(() => void (relaxRef.current = relax), [relax]);
@@ -55,6 +71,10 @@ const PixelDistortion = ({
   useEffect(() => void (brushRef.current = brush), [brush]);
   useEffect(() => void (maxPushRef.current = maxPush), [maxPush]);
   useEffect(() => void (momentumRef.current = momentum), [momentum]);
+  useEffect(() => void (rgbShiftRef.current = rgbShift), [rgbShift]);
+  useEffect(() => void (pixelateRef.current = pixelate), [pixelate]);
+  useEffect(() => void (wanderRef.current = wander), [wander]);
+  useEffect(() => void (wanderSpeedRef.current = wanderSpeed), [wanderSpeed]);
 
   // grid + dpr + image require a rebuild of the GPU resources
   useEffect(() => {
@@ -67,6 +87,7 @@ const PixelDistortion = ({
       antialias: true,
       alpha: true,
       powerPreference: "low-power",
+      preserveDrawingBuffer: true, // allows PNG capture of the canvas
     });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, dpr));
     container.appendChild(renderer.domElement);
@@ -95,6 +116,8 @@ const PixelDistortion = ({
       uDataTexture: { value: dataTexture },
       resolution: { value: new THREE.Vector4(1, 1, 1, 1) },
       uStrength: { value: strengthRef.current },
+      uRgbShift: { value: rgbShiftRef.current },
+      uPixelate: { value: pixelateRef.current },
     };
 
     const mesh = new THREE.Mesh(
@@ -114,11 +137,26 @@ const PixelDistortion = ({
           uniform sampler2D uDataTexture;
           uniform vec4 resolution;
           uniform float uStrength;
+          uniform float uRgbShift;
+          uniform float uPixelate;
           varying vec2 vUv;
           void main() {
             vec2 newUV = (vUv - 0.5) * resolution.zw + 0.5;
+            // mosaic: quantise sampling into big square cells
+            if (uPixelate > 1.0) {
+              newUV = (floor(newUV * uPixelate) + 0.5) / uPixelate;
+            }
             vec4 offset = texture2D(uDataTexture, vUv);
-            gl_FragColor = texture2D(uTexture, newUV - uStrength * offset.rg);
+            vec2 disp = uStrength * offset.rg;
+            if (uRgbShift > 0.0) {
+              // chromatic split: each channel travels a different distance
+              float r = texture2D(uTexture, newUV - disp * (1.0 + uRgbShift)).r;
+              vec4 gSample = texture2D(uTexture, newUV - disp);
+              float b = texture2D(uTexture, newUV - disp * (1.0 - uRgbShift)).b;
+              gl_FragColor = vec4(r, gSample.g, b, gSample.a);
+            } else {
+              gl_FragColor = texture2D(uTexture, newUV - disp);
+            }
           }
         `,
       }),
@@ -163,31 +201,53 @@ const PixelDistortion = ({
     };
     canvas.addEventListener("pointermove", onMove);
 
-    const updateGrid = () => {
-      const relaxValue = relaxRef.current;
-      for (let i = 0; i < GRID * GRID; i++) {
-        data[i * 4] *= relaxValue;
-        data[i * 4 + 1] *= relaxValue;
-      }
+    // autonomous "ghost cursor" that keeps the grid stirred without a mouse
+    const ghost = { x: 0.5, y: 0.5, t: Math.random() * 100 };
+
+    const applyBrush = (x: number, y: number, vx: number, vy: number) => {
       const radius = GRID * brushRef.current;
       const r2 = radius * radius;
       const forceValue = forceRef.current;
       const maxPushValue = maxPushRef.current;
-      const gx = GRID * mouse.x;
-      const gy = GRID * (1 - mouse.y);
+      const gx = GRID * x;
+      const gy = GRID * (1 - y);
       for (let i = 0; i < GRID; i++) {
         for (let j = 0; j < GRID; j++) {
           const dist = (gx - i) ** 2 + (gy - j) ** 2;
           if (dist < r2) {
             const idx = 4 * (i + GRID * j);
             const power = Math.min(radius / Math.sqrt(dist + 0.0001), maxPushValue);
-            data[idx] += forceValue * mouse.vx * power;
-            data[idx + 1] -= forceValue * mouse.vy * power;
+            data[idx] += forceValue * vx * power;
+            data[idx + 1] -= forceValue * vy * power;
           }
         }
       }
+    };
+
+    const updateGrid = (dt: number) => {
+      const relaxValue = relaxRef.current;
+      for (let i = 0; i < GRID * GRID; i++) {
+        data[i * 4] *= relaxValue;
+        data[i * 4 + 1] *= relaxValue;
+      }
+
+      applyBrush(mouse.x, mouse.y, mouse.vx, mouse.vy);
       mouse.vx *= momentumRef.current;
       mouse.vy *= momentumRef.current;
+
+      if (wanderRef.current) {
+        // layered sine orbit — never repeats visibly, stays inside the frame
+        ghost.t += dt * wanderSpeedRef.current;
+        const t = ghost.t;
+        const nx =
+          0.5 + 0.3 * Math.sin(t * 1.3) + 0.12 * Math.sin(t * 2.9 + 0.8);
+        const ny =
+          0.5 + 0.28 * Math.cos(t * 1.05) + 0.13 * Math.sin(t * 2.2 + 1.7);
+        applyBrush(ghost.x, ghost.y, nx - ghost.x, ny - ghost.y);
+        ghost.x = nx;
+        ghost.y = ny;
+      }
+
       dataTexture.needsUpdate = true;
     };
 
@@ -199,9 +259,11 @@ const PixelDistortion = ({
       last = now;
       shaderTime += dt;
       uniforms.uStrength.value = strengthRef.current;
+      uniforms.uRgbShift.value = rgbShiftRef.current;
+      uniforms.uPixelate.value = pixelateRef.current;
       animated.update(shaderTime * 1000);
       applyResolution();
-      updateGrid();
+      updateGrid(dt);
       renderer.render(scene, camera);
     };
 

@@ -12,16 +12,52 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "../ui/navigation-menu";
-import { StudioIcon } from "./icons/tools";
+import {
+  AlignJustify,
+  Blend,
+  CircleDot,
+  Clapperboard,
+  Grid3x3,
+  Sparkles,
+} from "lucide-react";
 import { TOOL_STUDIO_URL } from "@/lib/constants";
 
-// Only one tool ships today — the Studio. Add entries here as more land.
 const toolsMenu = [
   {
     title: "Studio",
     description: "Turn videos into ASCII art.",
     href: TOOL_STUDIO_URL,
-    icon: StudioIcon,
+    icon: Clapperboard,
+  },
+  {
+    title: "Pixel Distortion",
+    description: "Liquid-warp any image.",
+    href: "/tool/pixel-distortion",
+    icon: Sparkles,
+  },
+  {
+    title: "Dither Lab",
+    description: "Retro 1-bit dithering.",
+    href: "/tool/dither",
+    icon: Grid3x3,
+  },
+  {
+    title: "Halftone",
+    description: "Comic-book dot screens.",
+    href: "/tool/halftone",
+    icon: CircleDot,
+  },
+  {
+    title: "Mesh Gradient",
+    description: "Animated gradient wallpapers.",
+    href: "/tool/mesh-gradient",
+    icon: Blend,
+  },
+  {
+    title: "Pixel Sort",
+    description: "Glitchy databending.",
+    href: "/tool/pixel-sort",
+    icon: AlignJustify,
   },
 ];
 
