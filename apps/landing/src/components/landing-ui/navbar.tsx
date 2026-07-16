@@ -12,39 +12,16 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "../ui/navigation-menu";
-import {
-  DocumentationIcon,
-  ShowcaseIcon,
-  StudioIcon,
-  UploadIcon,
-} from "./icons/tools";
+import { StudioIcon } from "./icons/tools";
 import { TOOL_STUDIO_URL } from "@/lib/constants";
 
-// TODO: confirm final labels/links/copy for the Tools menu — placeholders for now.
+// Only one tool ships today — the Studio. Add entries here as more land.
 const toolsMenu = [
   {
     title: "Studio",
     description: "Turn videos into ASCII art.",
-    href: "/studio",
+    href: TOOL_STUDIO_URL,
     icon: StudioIcon,
-  },
-  {
-    title: "Showcase",
-    description: "Browse community animations.",
-    href: "/showcase",
-    icon: ShowcaseIcon,
-  },
-  {
-    title: "Upload",
-    description: "Publish your own creations.",
-    href: "/upload",
-    icon: UploadIcon,
-  },
-  {
-    title: "Documentation",
-    description: "Guides and component registry.",
-    href: "#",
-    icon: DocumentationIcon,
   },
 ];
 

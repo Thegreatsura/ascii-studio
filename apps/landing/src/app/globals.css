@@ -3,6 +3,12 @@
 
 @import "tailwindcss";
 
+/* Toolcraft design-system: custom variants + utility classes, then the
+ * scoped token theme. Both are inert outside `[data-toolcraft-theme]`. */
+@import "../tool/toolcraft/styles.css";
+@import "../tool/toolcraft/theme.css";
+@source "../tool/toolcraft";
+
 @plugin "tailwindcss-animate";
 @theme {
   --color-background: #f8fafc;

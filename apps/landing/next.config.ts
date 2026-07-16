@@ -14,6 +14,12 @@ const nextConfig: NextConfig = {
         destination: "/",
         permanent: true,
       },
+      {
+        // The pixel-distortion tool moved under the /tool zone.
+        source: "/studio",
+        destination: "/tool/pixel-distortion",
+        permanent: true,
+      },
     ];
   },
 };
