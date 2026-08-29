@@ -45,8 +45,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
   // Styles for selected (open) FAQ
   const selectedFaqStyle: React.CSSProperties = {
     background: BRAND_GRADIENT,
-    boxShadow:
-      "0px 46px 18px rgba(0, 0, 0, 0.01), 0px 26px 15px rgba(0, 0, 0, 0.05), 0px 11px 11px rgba(0, 0, 0, 0.09), 0px 3px 6px rgba(0, 0, 0, 0.1)",
+    boxShadow: "var(--shadow-float)",
     borderRadius: "16px",
     position: "relative",
     zIndex: 1,
@@ -55,8 +54,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
   // Styles for non-selected (closed) FAQ
   const defaultFaqStyle: React.CSSProperties = {
     background: "#FFFFFF",
-    boxShadow:
-      "0px 4px 1px rgba(0, 0, 0, 0.01), 0px 2px 1px rgba(0, 0, 0, 0.05), 0px 1px 1px rgba(0, 0, 0, 0.09), 0px 0px 1px rgba(0, 0, 0, 0.1), inset 0px 2px 2.2px #FFFFFF",
+    boxShadow: "var(--shadow-raised)",
     borderRadius: "16px",
   };
 

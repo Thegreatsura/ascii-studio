@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { GeistPixelGrid } from "geist/font/pixel";
 import { ThemeProvider } from "@/tool/components/theme-provider";
 import { Toaster } from "@/tool/components/ui/sonner";
+import AsciiFontStylesheet from "@/components/ascii-font-stylesheet";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,6 +31,7 @@ export default function ToolLayout({
     <div
       className={`${geistSans.variable} ${geistMono.variable} ${GeistPixelGrid.variable} ${geistSans.className} min-h-screen antialiased bg-[#F2F6FF]`}
     >
+      <AsciiFontStylesheet />
       <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
         {children}
         <Toaster />

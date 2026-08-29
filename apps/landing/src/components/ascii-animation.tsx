@@ -80,6 +80,7 @@ export default function ASCIIAnimation({
   const [isLoading, setIsLoading] = useState(true);
   const [currentFrame, setCurrentFrame] = useState(0);
   const [scale, setScale] = useState(1);
+  const [isOnScreen, setIsOnScreen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const framesRef = useRef<string[]>([]);
@@ -156,13 +157,29 @@ export default function ASCIIAnimation({
     animationManager.updateFPS(fps);
   }, [fps, animationManager]);
 
+  // Every frame is a React re-render of a few thousand characters, so an
+  // animation that has scrolled out of view is pure wasted main-thread time.
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsOnScreen(entry.isIntersecting),
+      // Start a little before it scrolls in so the first frame is never blank.
+      { rootMargin: "200px" },
+    );
+    observer.observe(el);
+
+    return () => observer.disconnect();
+  }, [isLoading]);
+
   useEffect(() => {
     if (frames.length === 0) return;
 
     const reducedMotion =
       window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
 
-    if (reducedMotion || !isPlaying) {
+    if (reducedMotion || !isPlaying || !isOnScreen) {
       animationManager.pause();
       return;
     }
@@ -186,7 +203,7 @@ export default function ASCIIAnimation({
       window.removeEventListener("blur", handleBlur);
       animationManager.pause();
     };
-  }, [animationManager, frames.length, isPlaying]);
+  }, [animationManager, frames.length, isPlaying, isOnScreen]);
 
   useEffect(() => {
     if (!fitToContainer) {
@@ -243,7 +260,6 @@ export default function ASCIIAnimation({
     };
   }, [
     fitToContainer,
-    currentFrame,
     frames.length,
     resolvedAppearance.borderRadius,
     resolvedAppearance.fontSize,

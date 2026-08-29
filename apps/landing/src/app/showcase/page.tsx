@@ -1,6 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import AsciiAnimationsGrid from "@/components/landing/grid";
+import AsciiFontStylesheet from "@/components/ascii-font-stylesheet";
 
 const SHOWCASE_TITLE = "Showcase";
 const SHOWCASE_DESCRIPTION =
@@ -28,6 +29,7 @@ export const metadata: Metadata = {
 const Page = () => {
   return (
     <div>
+      <AsciiFontStylesheet />
       <AsciiAnimationsGrid />
     </div>
   );

@@ -3,12 +3,36 @@ import { Check } from "@/components/icons/duotone";
 import React, { useState } from "react";
 import { AnimatePresence, motion, type Variants } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import FireBall from "../fireball";
-import BlueFirePricing from "../blue-fire-pricing";
+import dynamic from "next/dynamic";
+
+// Each of these is ~1MB of inline ASCII frame strings and sits well below the
+// fold, so they load on demand rather than in the landing page's first bundle.
+const FireBall = dynamic(() => import("../fireball"), {
+  ssr: false,
+  loading: () => <div style={{ width: "80vw", height: "100%" }} />,
+});
+const BlueFirePricing = dynamic(() => import("../blue-fire-pricing"), {
+  ssr: false,
+  loading: () => <div style={{ width: "100%", height: "100%" }} />,
+});
 
 const Pricing = () => {
   const sideColumnWidthPx = 260;
   const [isPricingPanelHovered, setIsPricingPanelHovered] = useState(false);
+  const bgVideoRef = React.useRef<HTMLVideoElement>(null);
+
+  // The video is invisible (opacity 0) until the panel is hovered, so there is
+  // no reason to fetch or decode it before then.
+  React.useEffect(() => {
+    const video = bgVideoRef.current;
+    if (!video) return;
+
+    if (isPricingPanelHovered) {
+      void video.play().catch(() => {});
+    } else {
+      video.pause();
+    }
+  }, [isPricingPanelHovered]);
   const [activeTab, setActiveTab] = useState<"monthly" | "yearly">("monthly");
 
   const contentVariants: Variants = {
@@ -104,8 +128,7 @@ const Pricing = () => {
         className="flex  p-1.5 justify-center items-center relative"
         style={{
           background: "#79A4FF",
-          boxShadow:
-            "0px 0px 4px rgba(0, 0, 0, 0.04), 0px 8px 16px rgba(0, 0, 0, 0.08), inset 2px 3px 3.5px rgba(255, 255, 255, 0.25)",
+          boxShadow: "var(--shadow-track)",
           borderRadius: "99px",
         }}
       >
@@ -120,8 +143,7 @@ const Pricing = () => {
               className="absolute inset-0"
               style={{
                 background: "#F5F5F5",
-                boxShadow:
-                  "0px 4px 1px rgba(0, 0, 0, 0.01), 0px 2px 1px rgba(0, 0, 0, 0.05), 0px 1px 1px rgba(0, 0, 0, 0.09), 0px 0px 1px rgba(0, 0, 0, 0.1), inset 0px 2px 2.2px #FFFFFF",
+                boxShadow: "var(--shadow-raised)",
                 borderRadius: "99px",
                 zIndex: 0,
               }}
@@ -147,8 +169,7 @@ const Pricing = () => {
               className="absolute inset-0"
               style={{
                 background: "#F5F5F5",
-                boxShadow:
-                  "0px 4px 1px rgba(0, 0, 0, 0.01), 0px 2px 1px rgba(0, 0, 0, 0.05), 0px 1px 1px rgba(0, 0, 0, 0.09), 0px 0px 1px rgba(0, 0, 0, 0.1), inset 0px 2px 2.2px #FFFFFF",
+                boxShadow: "var(--shadow-raised)",
                 borderRadius: "99px",
                 zIndex: 0,
               }}
@@ -170,18 +191,18 @@ const Pricing = () => {
         onMouseLeave={() => setIsPricingPanelHovered(false)}
         style={{
           background: "#F3F3F3",
-          boxShadow:
-            "0px 1px 0px rgba(255, 255, 255, 0.25), inset 0px 1px 2px 1px rgba(0, 0, 0, 0.15)",
+          boxShadow: "var(--shadow-well)",
           borderRadius: "32px",
         }}
       >
         <video
           className="pointer-events-none absolute object-cover transition-opacity duration-300"
+          ref={bgVideoRef}
           src="/pricing-bg.mp4"
-          autoPlay
           loop
           muted
           playsInline
+          preload="none"
           style={{
             opacity: isPricingPanelHovered ? 1 : 0,
             height: "100%",
@@ -202,8 +223,7 @@ const Pricing = () => {
             className="px-8 py-7"
             style={{
               background: "#FFFFFF",
-              boxShadow:
-                "0px 15px 6px rgba(0, 0, 0, 0.01), 0px 4px 4px rgba(0, 0, 0, 0.09), 0px 1px 2px rgba(0, 0, 0, 0.1)",
+              boxShadow: "var(--shadow-card)",
               borderRadius: "16px",
             }}
           >
@@ -268,8 +288,7 @@ const Pricing = () => {
             className="h-full"
             style={{
               background: "#FFFFFF",
-              boxShadow:
-                "0px 15px 6px rgba(0, 0, 0, 0.01), 0px 4px 4px rgba(0, 0, 0, 0.09), 0px 1px 2px rgba(0, 0, 0, 0.1)",
+              boxShadow: "var(--shadow-card)",
               borderRadius: "16px",
             }}
           >
@@ -278,8 +297,7 @@ const Pricing = () => {
                 className="h-full flex-1 border rounded-xl"
                 style={{
                   background: "#F5F5F5",
-                  boxShadow:
-                    "0px 1px 0px rgba(255, 255, 255, 0.25), inset 0px 1px 2px rgba(0, 0, 0, 0.15)",
+                  boxShadow: "var(--shadow-well)",
                 }}
               >
                 <AnimatePresence mode="wait" initial={false}>

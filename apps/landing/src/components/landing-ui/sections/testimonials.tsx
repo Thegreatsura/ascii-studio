@@ -5,25 +5,44 @@ import { motion } from "framer-motion";
 import TestimonialCard from "./testimonial-card";
 import { TESTIMONIALS } from "./testimonials-data";
 
+const CARD_GAP = 24;
+const MAX_CARD_WIDTH = 560;
+
 const Testimonials = () => {
   const [activeIndex, setActiveIndex] = React.useState(0);
-  const [cardWidth, setCardWidth] = React.useState(560);
-  const cardGap = 24;
+  const viewportRef = React.useRef<HTMLDivElement>(null);
+  const [viewportWidth, setViewportWidth] = React.useState(0);
 
+  // The track is clipped by the viewport, which shares its width with every
+  // other landing section, so cards line up with the layout on both edges.
   React.useEffect(() => {
-    const update = () => {
-      setCardWidth(
-        window.innerWidth < 640 ? Math.round(window.innerWidth * 0.88) : 560,
-      );
-    };
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
+    const el = viewportRef.current;
+    if (!el) return;
+    const observer = new ResizeObserver(([entry]) =>
+      setViewportWidth(entry.contentRect.width),
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
-  const handleNext = () => setActiveIndex((p) => (p + 1) % TESTIMONIALS.length);
+  const cardWidth = viewportWidth
+    ? Math.min(MAX_CARD_WIDTH, viewportWidth)
+    : MAX_CARD_WIDTH;
+  const step = cardWidth + CARD_GAP;
+  const visibleCount = viewportWidth
+    ? Math.max(1, Math.floor((viewportWidth + CARD_GAP) / step))
+    : 1;
+  // Stop once the last card reaches the right edge instead of scrolling into
+  // empty space.
+  const maxIndex = Math.max(0, TESTIMONIALS.length - visibleCount);
+
+  React.useEffect(() => {
+    setActiveIndex((p) => Math.min(p, maxIndex));
+  }, [maxIndex]);
+
+  const handleNext = () => setActiveIndex((p) => (p + 1) % (maxIndex + 1));
   const handlePrev = () =>
-    setActiveIndex((p) => (p - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
+    setActiveIndex((p) => (p - 1 + maxIndex + 1) % (maxIndex + 1));
 
   return (
     <div className="w-full flex flex-col max-w-[100vw] overflow-hidden text-center justify-center items-center">
@@ -48,11 +67,14 @@ const Testimonials = () => {
       </span>
 
       <div className="mt-14 w-full flex justify-center">
-        <div className="w-245 max-w-[92vw]">
+        {/* Width matches every other landing section, so the first card lines
+            up with the layout; trailing cards bleed past it and are clipped by
+            the section wrapper at the viewport edge. */}
+        <div ref={viewportRef} className="landing-content-width">
           <motion.div
             className="flex"
-            style={{ gap: `${cardGap}px` }}
-            animate={{ x: -activeIndex * (cardWidth + cardGap) }}
+            style={{ gap: `${CARD_GAP}px` }}
+            animate={{ x: -activeIndex * step }}
             transition={{
               type: "spring",
               stiffness: 280,
@@ -89,7 +111,7 @@ const Testimonials = () => {
         >
           <ChevronLeft className="hover:text-foreground transition-colors" />
         </button>
-        {activeIndex + 1} / {TESTIMONIALS.length}
+        {activeIndex + 1} / {maxIndex + 1}
         <button
           type="button"
           onClick={handleNext}

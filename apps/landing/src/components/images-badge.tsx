@@ -82,7 +82,7 @@ export function ImagesBadge({
           className="absolute inset-0"
           style={{
             background: "#6D94E6",
-            boxShadow: "inset 0px 0px 4px 2px rgba(255, 255, 255, 0.31)",
+            boxShadow: "var(--shadow-rim)",
             borderRadius: "14px",
           }}
         >
@@ -164,8 +164,7 @@ export function ImagesBadge({
           }}
           style={{
             background: "rgba(255, 255, 255, 0.48)",
-            boxShadow:
-              "-13px 43px 18px rgba(0, 0, 0, 0.01), -7px 24px 15px rgba(0, 0, 0, 0.04), -3px 11px 11px rgba(0, 0, 0, 0.07), -1px 3px 6px rgba(0, 0, 0, 0.08)",
+            boxShadow: "var(--shadow-float)",
             backdropFilter: "blur(12.5px)",
             WebkitBackdropFilter: "blur(12.5px)",
             transformStyle: "preserve-3d",

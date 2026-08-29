@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { motion, useMotionValue, useMotionTemplate } from "motion/react";
+import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
 import { ASCII_CHAR_PRESETS } from "@/lib/ascii-appearance";
 import { cn } from "@/lib/utils";
 

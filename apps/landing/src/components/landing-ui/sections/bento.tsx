@@ -1,6 +1,5 @@
 "use client";
 import { Atom, ChevronRight } from "@/components/icons/duotone";
-import { motion } from "framer-motion";
 import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -13,17 +12,9 @@ const Bento = () => {
     <div className="flex flex-col text-center justify-center items-center">
       {" "}
       <div className="flex justify-center items-center gap-2 text-xs border-2 border-blue-light-active px-2 py-1 rounded-full ">
-        <motion.span
-          className="inline-flex"
-          animate={{ rotate: [0, 90] }}
-          transition={{
-            duration: 1,
-            repeat: Infinity,
-            ease: [0.77, 0, 0.175, 1],
-          }}
-        >
+        <span className="landing-atom-spin inline-flex">
           <Atom size={16} />
-        </motion.span>
+        </span>
         Key Features
       </div>
       <span className="text-3xl sm:text-4xl md:text-5xl mt-2">
@@ -96,6 +87,8 @@ const Bento = () => {
               src="/textures/box.png"
               alt=""
               aria-hidden="true"
+              loading="lazy"
+              decoding="async"
             />
           </div>
         </div>
@@ -125,6 +118,8 @@ const Bento = () => {
               src="/textures/box.png"
               alt=""
               aria-hidden="true"
+              loading="lazy"
+              decoding="async"
             />
           </div>
           <div

@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import {
   Bold,
@@ -20,7 +22,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import BlueFire from "./blue-fire";
+import dynamic from "next/dynamic";
+
+// ~900KB of inline ASCII frame strings. Loading it lazily keeps it out of the
+// first-load JS; the placeholder reserves its height so nothing shifts.
+const BlueFire = dynamic(() => import("./blue-fire"), {
+  ssr: false,
+  loading: () => <div style={{ width: "100%", height: "50vh" }} />,
+});
 
 export default function StudioUiPreview() {
   return (

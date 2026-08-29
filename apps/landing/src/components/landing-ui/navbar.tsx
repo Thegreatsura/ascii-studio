@@ -67,11 +67,27 @@ const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
+    let frame = 0;
+
+    const read = () => {
+      frame = 0;
       setScrolled(window.scrollY > 10);
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    // Passive, so the listener never blocks scrolling, and coalesced into one
+    // read per frame instead of one per scroll event.
+    const handleScroll = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(read);
+    };
+
+    read();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      if (frame) window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const starSvg = (
@@ -143,26 +159,26 @@ const Navbar = () => {
           <NavigationMenu className="z-50 hidden lg:flex">
             <NavigationMenuList>
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="px-4 h-auto bg-transparent text-sm font-normal text-muted-foreground hover:text-black data-[state=open]:text-black hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent">
+                <NavigationMenuTrigger className="px-4 h-auto text-sm font-normal text-muted-foreground hover:text-black data-[state=open]:text-black">
                   Tools
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[440px] gap-0.5 p-1" style={{ zoom: 0.8 }}>
+                  <ul className="grid w-[340px] gap-0.5 p-1">
                     {toolsMenu.map((item) => (
                       <li key={item.title}>
                         <NavigationMenuLink
                           asChild
-                          className="group flex items-center gap-4 rounded-2xl p-1.5 transition-colors hover:bg-neutral-100 focus:bg-neutral-100"
+                          className="group flex items-center gap-3 rounded-2xl p-2 transition-colors duration-150 ease-out hover:bg-white/70 focus:bg-white/70 motion-reduce:transition-none"
                         >
                           <Link href={item.href}>
-                            <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-neutral-100 text-neutral-400 transition-colors group-hover:bg-neutral-200/70 group-hover:text-neutral-500">
-                              <item.icon className="size-7" />
+                            <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-white/70 text-slate-400 transition-colors duration-150 ease-out group-hover:bg-white group-hover:text-slate-600 motion-reduce:transition-none">
+                              <item.icon className="size-5" />
                             </span>
                             <span className="flex flex-col gap-1">
-                              <span className="text-lg font-semibold leading-none text-foreground">
+                              <span className="text-sm font-semibold leading-none text-foreground">
                                 {item.title}
                               </span>
-                              <span className="text-[15px] leading-snug text-muted-foreground">
+                              <span className="text-xs leading-snug text-muted-foreground">
                                 {item.description}
                               </span>
                             </span>
@@ -201,17 +217,6 @@ const Navbar = () => {
                     className="text-sm hover:text-black text-muted-foreground transition-colors duration-300"
                   >
                     Showcase
-                  </Link>
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-
-              <NavigationMenuItem>
-                <NavigationMenuLink className="px-4" asChild>
-                  <Link
-                    href="/upload"
-                    className="text-sm hover:text-black text-muted-foreground transition-colors duration-300"
-                  >
-                    Upload
                   </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
@@ -287,13 +292,6 @@ const Navbar = () => {
             onClick={() => setMobileMenuOpen(false)}
           >
             Showcase
-          </Link>
-          <Link
-            href="/upload"
-            className="py-2.5 px-3 rounded-xl hover:bg-accent text-sm font-medium transition-colors"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            Upload
           </Link>
           <div className="flex gap-2 pt-2 border-t border-border mt-1">
             <div className="relative group/star flex-1 flex items-center justify-center">

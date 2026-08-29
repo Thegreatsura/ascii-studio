@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion, useAnimationFrame, useMotionValue } from "motion/react";
+import { motion, useAnimationFrame, useMotionValue } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface PortalMarqueeTransformProps {
@@ -30,13 +30,16 @@ const TRANSFORMED_MEDIA: MarqueeMediaItem[] = [
 function MarqueeStrip({
   media,
   isActive,
+  isInView,
   transformed = false,
 }: {
   media: MarqueeMediaItem[];
   isActive: boolean;
+  isInView: boolean;
   transformed?: boolean;
 }) {
   const trackRef = React.useRef<HTMLDivElement>(null);
+  const videoRefs = React.useRef<(HTMLVideoElement | null)[]>([]);
   const x = useMotionValue(0);
   const [loopWidth, setLoopWidth] = React.useState(0);
   const loopMedia = [...media, ...media];
@@ -57,6 +60,17 @@ function MarqueeStrip({
       window.removeEventListener("resize", updateLoopWidth);
     };
   }, [media]);
+
+  React.useEffect(() => {
+    for (const video of videoRefs.current) {
+      if (!video) continue;
+      if (isActive) {
+        void video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    }
+  }, [isActive, isInView]);
 
   useAnimationFrame((_, delta) => {
     if (!isActive || loopWidth <= 0) {
@@ -92,7 +106,10 @@ function MarqueeStrip({
         >
           {item.type === "video" ? (
             <video
-              src={item.src}
+              ref={(el) => {
+                videoRefs.current[index] = el;
+              }}
+              src={isInView ? item.src : undefined}
               className="h-full w-full object-cover"
               style={
                 transformed
@@ -102,7 +119,6 @@ function MarqueeStrip({
                     }
                   : undefined
               }
-              autoPlay
               muted
               loop
               playsInline
@@ -111,8 +127,10 @@ function MarqueeStrip({
             />
           ) : (
             <img
-              src={item.src}
+              src={isInView ? item.src : undefined}
               alt="Moving preview"
+              loading="lazy"
+              decoding="async"
               className="h-full w-full object-cover"
               style={
                 transformed
@@ -134,9 +152,32 @@ export default function PortalMarqueeTransform({
   className,
 }: PortalMarqueeTransformProps) {
   const [isHovered, setIsHovered] = React.useState(false);
+  const [isInView, setIsInView] = React.useState(false);
+  const rootRef = React.useRef<HTMLDivElement>(null);
+
+  // This tile sits below the fold and holds several megabytes of video, so
+  // nothing gets a src until it is close to the viewport.
+  React.useEffect(() => {
+    const el = rootRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "300px" },
+    );
+    observer.observe(el);
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div
+      ref={rootRef}
       className={cn(
         "relative h-full w-full min-h-[190px] overflow-hidden rounded-xl",
         className,
@@ -145,7 +186,11 @@ export default function PortalMarqueeTransform({
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="absolute inset-0">
-        <MarqueeStrip media={SOURCE_MEDIA} isActive={isHovered} />
+        <MarqueeStrip
+          media={SOURCE_MEDIA}
+          isActive={isHovered}
+          isInView={isInView}
+        />
       </div>
 
       <div
@@ -155,6 +200,7 @@ export default function PortalMarqueeTransform({
         <MarqueeStrip
           media={TRANSFORMED_MEDIA}
           isActive={isHovered}
+          isInView={isInView}
           transformed
         />
       </div>

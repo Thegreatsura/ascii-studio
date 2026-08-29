@@ -12,8 +12,7 @@ const Footer = () => {
         className="landing-content-width p-4 sm:p-8 flex flex-col gap-4 sm:gap-8"
         style={{
           background: "#FFFFFF",
-          boxShadow:
-            "0px 4px 1px rgba(0, 0, 0, 0.01), 0px 2px 1px rgba(0, 0, 0, 0.05), 0px 1px 1px rgba(0, 0, 0, 0.09), 0px 0px 1px rgba(0, 0, 0, 0.1), inset 0px 2px 2.2px #FFFFFF",
+          boxShadow: "var(--shadow-raised)",
           borderRadius: "20px",
         }}
       >

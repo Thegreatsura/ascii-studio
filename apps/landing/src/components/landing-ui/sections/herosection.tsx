@@ -7,7 +7,21 @@ import { motion } from "framer-motion";
 import { ChevronRight } from "@/components/icons/duotone";
 import NumberFlow from "@number-flow/react";
 import StudioUiPreview from "@/components/studio-ui-preview";
-import TextYAnimation4 from "@/components/pixel-perfect/text-y-animation4";
+import dynamic from "next/dynamic";
+
+const TextYAnimation4 = dynamic(
+  () => import("@/components/pixel-perfect/text-y-animation4"),
+  {
+    ssr: false,
+    loading: () => (
+      <span className="relative flex justify-center items-center overflow-hidden">
+        <span className="perspective-distant leading-none uppercase">
+          ASCII
+        </span>
+      </span>
+    ),
+  },
+);
 import Sponsor from "../sponsor";
 import { TOOL_STUDIO_URL } from "@/lib/constants";
 
@@ -65,8 +79,7 @@ const HeroSection = () => {
                 background:
                   "linear-gradient(137.68deg, #79A4FF 22.55%, #79A4FF 86.49%)",
                 backgroundBlendMode: "plus-lighter, normal",
-                boxShadow:
-                  "0px 42px 107px rgba(87, 177, 255, 0.34), 0px 24.7206px 32.2574px rgba(87, 177, 255, 0.1867), 0px 10.2677px 13.3981px rgba(87, 177, 255, 0.22), 0px 3.71362px 4.84582px rgba(87, 177, 255, 0.153301), inset 0px 1px 18px 2px #D2EAFF, inset 0px 1px 4px 2px #D2EAFF",
+                boxShadow: "var(--shadow-brand)",
                 borderRadius: "100px",
               }}
             >
@@ -355,6 +368,8 @@ const HeroSection = () => {
               className="hidden sm:block h-14 absolute top-0 -left-16 rotate-6 rounded-xl aspect-square object-cover pointer-events-none"
               src="https://i.pinimg.com/736x/13/5d/6c/135d6c81b4b03da679355d6120375c6f.jpg"
               alt=""
+              decoding="async"
+              fetchPriority="low"
               initial={{ opacity: 0, scale: 0.5, x: 64, y: 12 }}
               animate={
                 isVideosHovered
@@ -367,6 +382,8 @@ const HeroSection = () => {
               className="hidden sm:block h-14 absolute top-0 -right-16 -rotate-6 rounded-xl aspect-square object-cover pointer-events-none"
               src="https://i.pinimg.com/1200x/c1/a4/5e/c1a45ed0afc3859009b99ad91fbb0f45.jpg"
               alt=""
+              decoding="async"
+              fetchPriority="low"
               initial={{ opacity: 0, scale: 0.5, x: -64, y: 12 }}
               animate={
                 isVideosHovered
@@ -379,6 +396,8 @@ const HeroSection = () => {
               className="hidden sm:block h-14 absolute bottom-0 -left-16 rotate-30 rounded-xl aspect-square object-cover pointer-events-none"
               src="https://i.pinimg.com/736x/13/5d/6c/135d6c81b4b03da679355d6120375c6f.jpg"
               alt=""
+              decoding="async"
+              fetchPriority="low"
               initial={{ opacity: 0, scale: 0.5, x: 64, y: -12 }}
               animate={
                 isVideosHovered
@@ -391,6 +410,8 @@ const HeroSection = () => {
               className="hidden sm:block h-14 absolute bottom-0 -right-16 -rotate-30 rounded-xl aspect-square object-cover pointer-events-none"
               src="https://i.pinimg.com/1200x/c1/a4/5e/c1a45ed0afc3859009b99ad91fbb0f45.jpg"
               alt=""
+              decoding="async"
+              fetchPriority="low"
               initial={{ opacity: 0, scale: 0.5, x: -64, y: -12 }}
               animate={
                 isVideosHovered
@@ -403,6 +424,8 @@ const HeroSection = () => {
               className="hidden sm:block h-14 absolute bottom-1/2 translate-y-1/2 -left-40 -rotate-24 rounded-xl aspect-square object-cover pointer-events-none"
               src="https://i.pinimg.com/736x/13/5d/6c/135d6c81b4b03da679355d6120375c6f.jpg"
               alt=""
+              decoding="async"
+              fetchPriority="low"
               initial={{ opacity: 0, scale: 0.5, x: 96, y: 25 }}
               animate={
                 isVideosHovered
@@ -415,6 +438,8 @@ const HeroSection = () => {
               className="hidden sm:block h-14 absolute bottom-1/2 translate-y-1/2 -right-40 rotate-24 rounded-xl aspect-square object-cover pointer-events-none"
               src="https://i.pinimg.com/1200x/c1/a4/5e/c1a45ed0afc3859009b99ad91fbb0f45.jpg"
               alt=""
+              decoding="async"
+              fetchPriority="low"
               initial={{ opacity: 0, scale: 0.5, x: -96, y: 25 }}
               animate={
                 isVideosHovered
@@ -509,11 +534,13 @@ const HeroSection = () => {
       </section>
       <Image
         className=" absolute z-0 -bottom-[17%] w-full h-full object-cover pointer-events-none"
-        src="/png/landing-bg.png"
+        src="/png/landing-bg.webp"
         alt=""
-        width={1920}
-        height={1080}
+        width={1200}
+        height={876}
         priority
+        fetchPriority="high"
+        sizes="100vw"
       />
     </>
   );

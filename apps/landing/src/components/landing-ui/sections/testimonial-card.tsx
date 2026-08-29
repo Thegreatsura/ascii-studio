@@ -37,8 +37,6 @@ const TestimonialCard = ({
       onMouseLeave={() => setIsCardHovered(false)}
       style={{
         background: BRAND_GRADIENT,
-        boxShadow:
-          "0px 46px 18px rgba(0, 0, 0, 0.01), 0px 26px 15px rgba(0, 0, 0, 0.05), 0px 11px 11px rgba(0, 0, 0, 0.09), 0px 3px 6px rgba(0, 0, 0, 0.1)",
         borderRadius: "24px",
       }}
     >
