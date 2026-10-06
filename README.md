@@ -28,6 +28,12 @@ https://github.com/user-attachments/assets/1537e97a-ff49-42f6-8d42-dd3fcdaa280f
 
 ---
 
+## Testing
+
+This project is tested with BrowserStack.
+
+---
+
 ## Star History
 
 <a href="https://www.star-history.com/?repos=vansh-nagar%2Fascii-studio&type=date&legend=top-left">
